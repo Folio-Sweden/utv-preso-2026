@@ -1,0 +1,50 @@
+body {
+  background-color: #222;
+  color: #eee;
+  background-image: url('images/FOLIO_Sverige_logga-alfa.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 100% 0%;
+}
+
+h1, h3 {
+  font-family: Impact;
+  font-weight: bold;
+  font-style: italic;
+}
+
+pre {
+    background-color: #444;
+}
+
+pre code {
+  color: #ccc;
+  font-size: 140%;
+}
+
+.slide {
+  background-color: inherit;
+}
+
+.keyword {
+  color: #0086b3 !important;
+  font-weight: inherit !important;
+}
+
+.tag {
+  color: #900 !important;
+}
+
+code {
+  /* background-color: inherit; */
+  background-color: #444;
+}
+
+em {
+  border-bottom: 1px solid #666;
+}
+
+.slide-content {
+    width: 80%;
+    height: 80%;
+}

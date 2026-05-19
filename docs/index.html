@@ -1,0 +1,747 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Utveckling &amp; teknik</title>
+  <style type="text/css">
+    body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
+  font-size: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: #f7f7f7;
+}
+
+.slide-content {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  margin: 80px auto 0 auto;
+  padding: 30px;
+
+  font-weight: 200;
+  font-size: 200%;
+  line-height: 1.375;
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0; height: 0;
+  border: 30px solid #333;
+  float: left;
+  margin-right: 30px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+
+  border-left-width: 50px;
+  border-right-width: 0;
+}
+
+.prev:hover {
+  border-right-color: #888;
+  cursor: pointer;
+}
+
+.next:hover {
+  border-left-color: #888;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 300%;
+  line-height: 1.2;
+  text-align: center;
+  margin: 170px 0 0;
+}
+
+h2 {
+  font-size: 100%;
+  line-height: 1.2;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 140%;
+  line-height: 1.2;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  line-height: 1.375;
+}
+
+.author h1 {
+  font-size: 170%;
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 95%;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: #44a4dd;
+}
+
+a:hover {
+  color: #66b5ff;
+}
+
+pre {
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 1;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background-color: #b4b4b4;
+
+  -webkit-transition: width 0.05s ease-out;
+  -moz-transition: width 0.05s ease-out;
+  -o-transition: width 0.05s ease-out;
+  transition: width 0.05s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+
+  body {
+    font-size: 70%;
+  }
+
+  .slide-content {
+    width: auto;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 120px;
+  }
+
+  .prev, .prev:hover {
+    border-right-color: rgba(135, 135, 135, 0.5);
+  }
+
+  .next, .next:hover {
+    border-left-color: rgba(135, 135, 135, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 50%;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    padding: 10px;
+    margin-top: 10px;
+    height: 340px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+
+  @page {
+    size: letter;
+  }
+
+  .hidden {
+    display: inline;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body {
+    margin: 0 auto !important;
+    border: 0;
+    padding: 0;
+    float: none !important;
+    overflow: visible;
+    background: none !important;
+    font-size: 52%;
+  }
+
+  .progress, .controls {
+    display: none;
+  }
+
+  .slide {
+    position: static;
+  }
+
+  .slide-content {
+    border: 1px solid #222;
+    margin-top: 0;
+    margin-bottom: 40px;
+    height: 3.5in;
+    overflow: visible;
+  }
+
+  .slide:nth-child(even) {
+    /* 2 slides per page */
+    page-break-before: always;
+  }
+}
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+body {
+  background-color: #222;
+  color: #eee;
+  background-image: url('images/FOLIO_Sverige_logga-alfa.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 100% 0%;
+}
+
+h1, h3 {
+  font-family: Impact;
+  font-weight: bold;
+  font-style: italic;
+}
+
+pre {
+    background-color: #444;
+}
+
+pre code {
+  color: #ccc;
+  font-size: 140%;
+}
+
+.slide {
+  background-color: inherit;
+}
+
+.keyword {
+  color: #0086b3 !important;
+  font-weight: inherit !important;
+}
+
+.tag {
+  color: #900 !important;
+}
+
+code {
+  /* background-color: inherit; */
+  background-color: #444;
+}
+
+em {
+  border-bottom: 1px solid #666;
+}
+
+.slide-content {
+    width: 80%;
+    height: 80%;
+}
+  </style>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="slide" id="slide-1">
+    <section class="slide-content"><!-- theme: sudodoki/reveal-cleaver-theme -->
+<h1 id="utveckling-teknik">Utveckling &amp; teknik</h1>
+<h2 id="snillen-spekulerar-om-l-ntagar-apier-och-annat-utvecklarrelaterat">Snillen spekulerar om Låntagar-APIer och annat utvecklarrelaterat</h2>
+<p>Martin Ericsson, Kungliga biblioteket<br>Lari Kovanen, Chalmers tekniska högskola</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-2">
+    <section class="slide-content"><h3 id="vad-vi-skall-titta-p-">Vad vi skall titta på</h3>
+<ul>
+<li>Var hittar man info</li>
+<li>Att skapa användare</li>
+<li>Att radera användare</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-3">
+    <section class="slide-content"><h3 id="var-hittar-man-info">Var hittar man info</h3>
+<ul>
+<li>API-dokumentation hittas på <a href="https://dev.folio.org">https://dev.folio.org</a> som är uppdelad efter FOLIO-modulerna.  </li>
+<li>I FOLIO-wikin <a href="https://wiki.folio.org">https://wiki.folio.org</a> kan man hitta mer info om apierna och mer dokumentation om apierna.  </li>
+<li>I FOLIO-slacken så kan man givetvis fråga om allt men även om apier.  </li>
+<li>WEB-GUIet för FOLIO är fin källa till att se hur saker och ting går till.</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-4">
+    <section class="slide-content"><h3 id="att-skapa-anv-ndare">Att skapa användare</h3>
+<p>Vilken information är obligatorisk</p>
+<ul>
+<li>Efternamn</li>
+<li>Låntagargrupp (id)</li>
+<li>Status</li>
+<li>E-mejl</li>
+<li>Föredragen kontaktväg</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-5">
+    <section class="slide-content"><h3 id="att-skapa-anv-ndare">Att skapa användare</h3>
+<p>Bra att ha information</p>
+<ul>
+<li>användarnamn</li>
+<li>externt användarnamn</li>
+<li>streckkod</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-6">
+    <section class="slide-content"><h3 id="vilka-steg-beh-vs-f-r-att-skapa-anv-ndare-">Vilka steg behövs för att skapa användare.</h3>
+<ol>
+<li>Skaffa api-token</li>
+<li>Patrongroup</li>
+<li>Skapa en user</li>
+<li>Skapa Permissions (Enbart i OKAPI-system)</li>
+<li>Skapa RequestPreference</li>
+<li>ID-block?</li>
+<li>Sätt pinkod/lösenord</li>
+</ol>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-7">
+    <section class="slide-content"><h3 id="skaffa-api-token">Skaffa api-token</h3>
+<p>Posta till <code>/authn/login-with-expiry</code><br>där headern innehåller vilken tenant som avses i <code>X-OKAPI-TOKEN</code> som</p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"username"</span>:<span class="hljs-string">"användarnamn"</span>,
+    <span class="hljs-attr">"password"</span>:<span class="hljs-string">"lösenord"</span>
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-8">
+    <section class="slide-content"><h3 id="svar">Svar</h3>
+<p>Två cookies med token returneras.</p>
+<pre><code>set-cookie: folioAccessToken=xxx; Max-Age=600; Expires=Mon, 18 May 2026 16:07:35 GMT;
+Path=/; Secure; HTTPOnly; SameSite=None
+set-cookie: folioRefreshToken=yyy; Max-Age=604800; Expires=Mon, 25 May 2026 15:57:35 GMT;
+Path=/authn; Secure; HTTPOnly; SameSite=None
+</code></pre></section>
+  </div>
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><p>och bodyn består av json med expire-tiderna upprepad.</p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"accessTokenExpiration"</span>:<span class="hljs-string">"2026-05-18T16:07:35Z"</span>,
+    <span class="hljs-attr">"refreshTokenExpiration"</span>:<span class="hljs-string">"2026-05-25T15:57:35Z"</span>
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h3 id="hitta-l-ntagargrupp">Hitta låntagargrupp</h3>
+<p>GET <code>/groups</code></p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"usergroups"</span>: [
+    {
+      <span class="hljs-attr">"group"</span>: <span class="hljs-string">"faculty"</span>,
+      <span class="hljs-attr">"desc"</span>: <span class="hljs-string">"Faculty Member"</span>,
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"503a81cd-6c26-400f-b620-14c08943697c"</span>,
+      <span class="hljs-attr">"expirationOffsetInDays"</span>: <span class="hljs-number">365</span>,
+      <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"createdDate"</span>: <span class="hljs-string">"2026-05-19T01:51:33.022+00:00"</span>,
+        <span class="hljs-attr">"updatedDate"</span>: <span class="hljs-string">"2026-05-19T01:51:33.022+00:00"</span>
+      }
+    },
+    ......
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h3 id="skapa-anv-ndaren">Skapa användaren</h3>
+<p>POST <code>/users</code></p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"username"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"externalSystemId"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"active"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"personal"</span>: {
+        <span class="hljs-attr">"firstName"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"lastName"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"email"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"preferredContactTypeId"</span>: <span class="hljs-string">"002"</span>
+    },
+    <span class="hljs-attr">"barcode"</span>:<span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"patronGroup"</span>:<span class="hljs-string">"GUID"</span>
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h3 id="skapa-r-ttighegter-f-r-anv-ndaren">Skapa rättighegter för användaren</h3>
+<p>Post till <code>/perms/users</code>  </p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-string">"GUID"</span>,
+    <span class="hljs-attr">"permissions"</span>: []
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h3 id="skapa-best-llarpreferens">Skapa beställarpreferens</h3>
+<p>Post till <code>/request-preference-storage/request-preference</code>  </p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-string">"GUID"</span>,
+    <span class="hljs-attr">"holdShelf"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"delivery"</span>: <span class="hljs-literal">false</span>
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"><h3 id="skapa-id-block">Skapa ID-block</h3>
+<p>Post till <code>/manualblocks</code>  </p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-string">"GUID"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"Manual"</span>,
+    <span class="hljs-attr">"desc"</span>: <span class="hljs-string">"Nyskapat konto. ID-koll!!"</span>,
+    <span class="hljs-attr">"staffInformation"</span>: <span class="hljs-string">"Info som personal behöver."</span>,
+    <span class="hljs-attr">"patronMessage"</span>: <span class="hljs-string">"Eventuell info till användaren. Visa ID."</span>,
+    <span class="hljs-attr">"borrowing"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"renewals"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"requests"</span>: <span class="hljs-literal">false</span>
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-15">
+    <section class="slide-content"><h3 id="skapa-pin-l-senord">Skapa pin/lösenord</h3>
+<p>Post till <code>/patron-pin</code> med header <code>Accept: text/plain</code>  </p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"GUID"</span>,
+    <span class="hljs-attr">"pin"</span>: <span class="hljs-string">"pin/lösenord"</span>
+}
+</code></pre>
+</section>
+  </div>
+
+
+
+  <script type="text/javascript">
+    /**
+ * Returns the current page number of the presentation.
+ */
+function currentPosition() {
+  return parseInt(document.querySelector('.slide:not(.hidden)').id.slice(6));
+}
+
+
+/**
+ * Navigates forward n pages
+ * If n is negative, we will navigate in reverse
+ */
+function navigate(n) {
+  var position = currentPosition();
+  var numSlides = document.getElementsByClassName('slide').length;
+
+  /* Positions are 1-indexed, so we need to add and subtract 1 */
+  var nextPosition = (position - 1 + n) % numSlides + 1;
+
+  /* Normalize nextPosition in-case of a negative modulo result */
+  nextPosition = (nextPosition - 1 + numSlides) % numSlides + 1;
+
+  document.getElementById('slide-' + position).classList.add('hidden');
+  document.getElementById('slide-' + nextPosition).classList.remove('hidden');
+
+  updateProgress();
+  updateURL();
+  updateTabIndex();
+}
+
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  try {
+    window.history.replaceState({} , null, '#' + currentPosition());
+  } catch (e) {
+    window.location.hash = currentPosition();
+  }
+}
+
+
+/**
+ * Sets the progress indicator.
+ */
+function updateProgress() {
+  var progressBar = document.querySelector('.progress-bar');
+
+  if (progressBar !== null) {
+    var numSlides = document.getElementsByClassName('slide').length;
+    var position = currentPosition() - 1;
+    var percent = (numSlides === 1) ? 100 : 100 * position / (numSlides - 1);
+    progressBar.style.width = percent.toString() + '%';
+  }
+}
+
+
+/**
+ * Removes tabindex property from all links on the current slide, sets
+ * tabindex = -1 for all links on other slides. Prevents slides from appearing
+ * out of control.
+ */
+function updateTabIndex() {
+  var allLinks = document.querySelectorAll('.slide a');
+  var position = currentPosition();
+  var currentPageLinks = document.getElementById('slide-' + position).querySelectorAll('a');
+  var i;
+
+  for (i = 0; i < allLinks.length; i++) {
+    allLinks[i].setAttribute('tabindex', -1);
+  }
+
+  for (i = 0; i < currentPageLinks.length; i++) {
+    currentPageLinks[i].removeAttribute('tabindex');
+  }
+}
+
+/**
+ * Determines whether or not we are currently in full screen mode
+ */
+function isFullScreen() {
+  return document.fullscreenElement ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement ||
+         document.msFullscreenElement;
+}
+
+/**
+ * Toggle fullScreen mode on document element.
+ * Works on chrome (>= 15), firefox (>= 9), ie (>= 11), opera(>= 12.1), safari (>= 5).
+ */
+function toggleFullScreen() {
+  /* Convenient renames */
+  var docElem = document.documentElement;
+  var doc = document;
+
+  docElem.requestFullscreen =
+      docElem.requestFullscreen ||
+      docElem.msRequestFullscreen ||
+      docElem.mozRequestFullScreen ||
+      docElem.webkitRequestFullscreen.bind(docElem, Element.ALLOW_KEYBOARD_INPUT);
+
+  doc.exitFullscreen =
+      doc.exitFullscreen ||
+      doc.msExitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen;
+
+  isFullScreen() ? doc.exitFullscreen() : docElem.requestFullscreen();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Update the tabindex to prevent weird slide transitioning
+  updateTabIndex();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) {
+    navigate(parseInt(page) - 1);
+  }
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - FULLSCREEN
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+      navigate(-1);
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+      navigate(1);
+    } else if (kc === 13) {
+      toggleFullScreen();
+    }
+  };
+
+  if (document.querySelector('.next') && document.querySelector('.prev')) {
+    document.querySelector('.next').onclick = function (e) {
+      e.preventDefault();
+      navigate(1);
+    };
+
+    document.querySelector('.prev').onclick = function (e) {
+      e.preventDefault();
+      navigate(-1);
+    };
+  }
+});
+
+
+  </script>
+</body>
+</html>

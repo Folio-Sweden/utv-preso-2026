@@ -1,0 +1,120 @@
+@FOLIO_URL = {{$dotenv FOLIO_URL}}
+@FOLIO_USERNAME = {{$dotenv FOLIO_USERNAME}}
+@FOLIO_PASSWORD = {{$dotenv FOLIO_PASSWORD}}
+@FOLIO_TENANT = {{$dotenv FOLIO_TENANT}}
+
+### FOLIO login
+POST {{FOLIO_URL}}/authn/login-with-expiry
+Content-Type: application/json
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+{
+  "username": "{{FOLIO_USERNAME}}",
+  "password": "{{FOLIO_PASSWORD}}"
+}
+
+### FOLIO Renew token
+POST {{FOLIO_URL}}/authn/refresh
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+### FOLIO Get groups
+GET {{FOLIO_URL}}/groups
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+### FOLIO Create user
+POST {{FOLIO_URL}}/users
+Content-Type: application/json
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+{
+    "active": true,
+    "personal": {
+        "lastName": "Test1234-42",
+        "email": "test@example.com",
+        "preferredContactTypeId": "002"
+    },
+    "patronGroup":"503a81cd-6c26-400f-b620-14c08943697c"
+}
+
+### FOLIO Get user
+# GET {{FOLIO_URL}}/users?query=id=74af3354-aa84-4b42-bd38-aea47d94fed8
+GET {{FOLIO_URL}}/users/74af3354-aa84-4b42-bd38-aea47d94fed8
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+### FOLIO Create perms
+POST {{FOLIO_URL}}/perms/users
+Content-Type: application/json
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+{
+  "userId": "74af3354-aa84-4b42-bd38-aea47d94fed8",
+  "permissions": []
+}
+
+### FOLIO Request preference
+POST {{FOLIO_URL}}/request-preference-storage/request-preference
+Content-Type: application/json
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+{
+  "userId": "74af3354-aa84-4b42-bd38-aea47d94fed8",
+  "holdShelf": true,
+  "delivery": false
+}
+
+### FOLIO Get request preference
+GET {{FOLIO_URL}}/request-preference-storage/request-preference/52fef027-a555-4433-bfc0-c443939dfe19
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+### FOLIO Create block
+POST {{FOLIO_URL}}/manualblocks
+Content-Type: application/json
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+{
+    "userId": "74af3354-aa84-4b42-bd38-aea47d94fed8",
+    "type": "Manual",
+    "desc": "Nyskapat konto. ID-koll!!",
+    "staffInformation": "Info som personal behöver.",
+    "patronMessage": "Eventuell info till användaren. Visa ID.",
+    "borrowing": true,
+    "renewals": false,
+    "requests": false
+}
+
+### FOLIO Get blocks
+GET {{FOLIO_URL}}/manualblocks/0c88383c-56bf-466b-9abe-9b4cdb470297
+Accept: application/json
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+
+### FOLIO Create pin/pass
+POST {{FOLIO_URL}}/patron-pin
+Content-Type: application/json
+Accept: text/plain
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+{
+    "id": "74af3354-aa84-4b42-bd38-aea47d94fed8",
+    "pin": "189403"
+}
+
+### FOLIO Verify pin/pass
+POST {{FOLIO_URL}}/patron-pin/verify
+Content-Type: application/json
+Accept: text/plain
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+{
+    "id": "74af3354-aa84-4b42-bd38-aea47d94fed8",
+    "pin": "189403"
+}
