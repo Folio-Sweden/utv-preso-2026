@@ -118,3 +118,13 @@ X-OKAPI-TENANT: {{FOLIO_TENANT}}
     "id": "74af3354-aa84-4b42-bd38-aea47d94fed8",
     "pin": "189403"
 }
+
+### FOLIO Check transactions
+GET {{FOLIO_URL}}/bl-users/by-id/6071711e-7820-4b2a-a3dc-4f0c91b16313/open-transactions
+Accept: text/plain
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
+
+### FOLIO Delete user
+DELETE {{FOLIO_URL}}/bl-users/by-id/6071711e-7820-4b2a-a3dc-4f0c91b16313
+Accept: text/plain
+X-OKAPI-TENANT: {{FOLIO_TENANT}}
