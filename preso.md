@@ -19,7 +19,7 @@ Lari Kovanen, Chalmers tekniska högskola
 - API-dokumentation hittas på [https://dev.folio.org](https://dev.folio.org) som är uppdelad efter FOLIO-modulerna.  
 - I FOLIO-wikin [https://wiki.folio.org](https://wiki.folio.org) kan man hitta mer info om apierna och mer dokumentation om apierna.  
 - I FOLIO-slacken så kan man givetvis fråga om allt men även om apier.  
-- WEB-GUIet för FOLIO är fin källa till att se hur saker och ting går till. 
+- WEB-GUIet för FOLIO är fin källa till att se hur saker och ting går till via utvecklarverktygen i browsern. 
 --
 ### Att skapa användare
 Vilken information är obligatorisk
@@ -36,7 +36,7 @@ Bra att ha information
 - streckkod
 --
 ### Vilka steg behövs för att skapa användare.
-1. Skaffa api-token
+1. Skaffa api-token med användare som har korrekta rättigheter
 1. Patrongroup
 1. Skapa en user
 1. Skapa Permissions (Enbart i OKAPI-system)
@@ -55,7 +55,6 @@ där headern innehåller vilken tenant som avses i `X-OKAPI-TOKEN` som
 }
 ```
 --
-### Svar
 Två cookies med token returneras.
 ```
 set-cookie: folioAccessToken=xxx; Max-Age=600; Expires=Mon, 18 May 2026 16:07:35 GMT;
@@ -150,3 +149,32 @@ Post till `/patron-pin` med header `Accept: text/plain`
     "pin": "pin/lösenord"
 }
 ```
+--
+### Radera användare
+- Kolla om användare har några öppna transaktioner
+- Radera användaren
+--
+### Öppna transaktioner
+GET `/bl-users/by-id/{Användar id}/open-transactions`
+```json
+{
+  "userId": "Användar id",
+  "hasOpenTransactions": false,
+  "loans": 0,
+  "requests": 0,
+  "feesFines": 0,
+  "proxies": 0,
+  "blocks": 0
+}
+```
+--
+### Radera användare
+DELETE `/bl-users/by-id/{användar id}`  
+
+Returnerar Status 204 om den lyckades.
+--
+### Slides och exempel api anrop
+Repot till dessa slides finns på  
+`https://github.com/Folio-Sweden/utv-preso-2026`  
+och själva slides finns på  
+`https://folio-sweden.github.io/utv-preso-2026/`
