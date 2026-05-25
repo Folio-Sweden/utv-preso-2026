@@ -13,7 +13,8 @@ Lari Kovanen, Chalmers tekniska högskola
 ### Vad vi skall titta på
 - Var hittar man info
 - Att skapa användare
-- Att radera användare 
+- Att radera användare
+- Exempel på användning hos KB
 --
 ### Var hittar man info
 - API-dokumentation hittas på [https://dev.folio.org](https://dev.folio.org) som är uppdelad efter FOLIO-modulerna.  
@@ -172,6 +173,15 @@ GET `/bl-users/by-id/{Användar id}/open-transactions`
 DELETE `/bl-users/by-id/{användar id}`  
 
 Returnerar Status 204 om den lyckades.
+--
+### KB: Inloggningsflöde
+![Bild 1](images/Bild%201.png)
+--
+### KB: "Ny låntagare"-tjänsten
+![Bild 2](images/Bild%202.png)
+--
+### KB: Migrering från Aleph
+![Bild 3](images/Bild%203.png)
 --
 ### Slides och exempel api anrop
 Repot till dessa slides finns på  
