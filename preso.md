@@ -188,8 +188,8 @@ Returnerar Status 204 om den lyckades.
 ### KB: Migrering från Aleph
 ![Bild 3](images/Bild%203.png)
 --
-### Slides och exempel api anrop
-Repot till dessa slides finns på  
-`https://github.com/Folio-Sweden/utv-preso-2026`  
-och själva slides finns på  
-`https://folio-sweden.github.io/utv-preso-2026/`
+### Slides och repo
+|Slides|Repo|
+|------|----|
+|![QR Slides](images/qrcode_slides.png)|![QR Slides](images/qrcode_repo.png)|
+|`https://folio-sweden.github.io/utv-preso-2026/`|`https://github.com/Folio-Sweden/utv-preso-2026`|
