@@ -174,6 +174,11 @@ DELETE `/bl-users/by-id/{användar id}`
 
 Returnerar Status 204 om den lyckades.
 --
+### Chalmers: Låntagarregistrering
+![account.lib](images/account.lib.png)
+--
+![Låntagarregistrering](images/account.lib.drawio.svg)
+--
 ### KB: Inloggningsflöde
 ![Bild 1](images/Bild%201.png)
 --
