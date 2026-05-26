@@ -179,6 +179,18 @@ Returnerar Status 204 om den lyckades.
 --
 ![Låntagarregistrering](images/account.lib.drawio.svg)
 --
+### Chalmers: Radering av användare 
+- 2 gånger per år
+- Allmänheten
+  - konton äldre än 2 år utan transaktioner inaktiveras
+  - Markeras med körningsdatum inför radering
+- Studenter och anställda
+  - Koll mot Chalmers Persondatabas om de är aktiva
+  - Transaktionkoll i FOLIO
+  - Inaktiva utan transaktioner raderas
+  - Med transaktioner undersöks
+  - Görs om till allmänhet med eventuell ny emejl.
+--
 ### KB: Inloggningsflöde
 ![Bild 1](images/Bild%201.png)
 --
