@@ -444,7 +444,9 @@ em {
 <li>API-dokumentation hittas på <a href="https://dev.folio.org">https://dev.folio.org</a> som är uppdelad efter FOLIO-modulerna.  </li>
 <li>I FOLIO-wikin <a href="https://wiki.folio.org">https://wiki.folio.org</a> kan man hitta mer info om apierna och mer dokumentation om apierna.  </li>
 <li>I FOLIO-slacken så kan man givetvis fråga om allt men även om apier.  </li>
-<li>WEB-GUIet för FOLIO är fin källa till att se hur saker och ting går till via utvecklarverktygen i browsern.</li>
+<li>WEB-GUIet för FOLIO är fin källa till att se hur saker och ting går till via utvecklarverktygen i browsern. </li>
+<li>FOLIO-FSE har diverse repos att förkovra sig i. <a href="https://github.com/FOLIO-FSE">FOLIO-FSE</a></li>
+<li>Javascript biblioteket för att prata med FOLIO. <a href="https://github.com/indexdata/foliojs">@indexdata/foliojs</a></li>
 </ul>
 </section>
   </div>
@@ -485,7 +487,7 @@ em {
   </div>
   <div class="slide hidden" id="slide-7">
     <section class="slide-content"><h3 id="skaffa-api-token">Skaffa api-token</h3>
-<p>Posta till <code>/authn/login-with-expiry</code><br>där headern innehåller vilken tenant som avses i <code>X-OKAPI-TOKEN</code> som</p>
+<p>Posta till <code>/authn/login-with-expiry</code><br>där headern innehåller vilken tenant som avses i <code>X-OKAPI-TENANT</code> som</p>
 <pre><code class="lang-json">{
     <span class="hljs-attr">"username"</span>:<span class="hljs-string">"användarnamn"</span>,
     <span class="hljs-attr">"password"</span>:<span class="hljs-string">"lösenord"</span>

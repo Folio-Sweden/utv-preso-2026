@@ -21,6 +21,8 @@ Lari Kovanen, Chalmers tekniska högskola
 - I FOLIO-wikin [https://wiki.folio.org](https://wiki.folio.org) kan man hitta mer info om apierna och mer dokumentation om apierna.  
 - I FOLIO-slacken så kan man givetvis fråga om allt men även om apier.  
 - WEB-GUIet för FOLIO är fin källa till att se hur saker och ting går till via utvecklarverktygen i browsern. 
+- FOLIO-FSE har diverse repos att förkovra sig i. [FOLIO-FSE](https://github.com/FOLIO-FSE)
+- Javascript biblioteket för att prata med FOLIO. [@indexdata/foliojs](https://github.com/indexdata/foliojs)
 --
 ### Att skapa användare
 Vilken information är obligatorisk
@@ -48,7 +50,7 @@ Bra att ha information
 --
 ### Skaffa api-token
 Posta till `/authn/login-with-expiry`  
-där headern innehåller vilken tenant som avses i `X-OKAPI-TOKEN` som
+där headern innehåller vilken tenant som avses i `X-OKAPI-TENANT` som
 ```json
 {
     "username":"användarnamn",
